@@ -39,6 +39,10 @@ export const metadata: Metadata = {
     creator: SITE_CONFIG.twitter,
   },
   alternates: { canonical: SITE_CONFIG.url },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export const viewport: Viewport = {

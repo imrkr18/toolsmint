@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   publisher: SITE_CONFIG.name,
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: {
+      "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID as string,
+    },
   },
   robots: {
     index: true, follow: true,

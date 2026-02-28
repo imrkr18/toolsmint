@@ -12,7 +12,7 @@ export default function AdSlot({
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="YOUR_ADSENSE_PUBLISHER_ID"
+        data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID}
         data-ad-slot={slotId}
         data-ad-format="auto"
         data-full-width-responsive="true"

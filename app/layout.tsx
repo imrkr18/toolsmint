@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   creator: SITE_CONFIG.name,
   publisher: SITE_CONFIG.name,
   verification: {
-    google: "YOUR_GOOGLE_SITE_VERIFICATION_ID", // TODO: Replace with actual ID
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   robots: {
     index: true, follow: true,
@@ -86,12 +86,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SpeedInsights />
         </ThemeProvider>
         {/* Google AdSense Script */}
-        <Script 
-          id="adsbygoogle-init"
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_PUBLISHER_ID"
-        />
+        {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
+          <Script 
+            id="adsbygoogle-init"
+            strategy="afterInteractive"
+            crossOrigin="anonymous"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID}`}
+          />
+        )}
       </body>
     </html>
   );

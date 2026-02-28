@@ -4,9 +4,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AdSlot from '@/components/AdSlot';
 
-// Lightweight QR using Google Charts API (no npm package needed)
+// Lightweight QR using api.qrserver.com (no npm package needed)
 function qrUrl(text: string, size: number) {
-  return `https://chart.googleapis.com/chart?chs=${size}x${size}&cht=qr&chl=${encodeURIComponent(text)}&choe=UTF-8`;
+  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`;
 }
 
 export default function QRGeneratorClient() {
@@ -21,11 +21,23 @@ export default function QRGeneratorClient() {
     setGenerated(qrUrl(text.trim(), size));
   }, [text, size]);
 
-  const download = () => {
-    const a = document.createElement('a');
-    a.href = generated;
-    a.download = 'qrcode.png';
-    a.click();
+  const download = async () => {
+    try {
+      const response = await fetch(generated);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'qrcode.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error('Download failed, opening in new tab', e);
+      window.open(generated, '_blank');
+    }
   };
 
   return (
@@ -58,16 +70,18 @@ export default function QRGeneratorClient() {
             </button>
 
             {generated && (
-              <div style={{ textAlign: 'center', padding: '32px', background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)' }} aria-live="polite">
+              <div className="result-card" aria-live="polite">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={generated} alt="Generated QR Code"
                   width={size} height={size}
-                  style={{ margin: '0 auto 20px', borderRadius: '8px', background: '#fff', padding: '12px' }}
+                  style={{ margin: '0 auto 20px', borderRadius: '8px', background: '#fff', padding: '12px', display: 'block' }}
                   onLoad={() => setLoading(false)}
                 />
                 {!loading && (
-                  <button className="btn btn-secondary" onClick={download}>⬇ Download PNG</button>
+                  <button className="btn btn-secondary btn-full" onClick={download}>
+                    <span style={{ marginRight: '8px' }}>⬇</span> Download QR Code (PNG)
+                  </button>
                 )}
               </div>
             )}

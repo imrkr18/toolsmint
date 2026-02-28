@@ -61,12 +61,12 @@ export default function AgeCalculatorClient() {
               <div aria-live="polite">
                 <div className="result-grid" style={{ marginBottom: '16px' }}>
                   {[
-                    { v: result.years,   l: 'Years' },
-                    { v: result.months,  l: 'Months' },
-                    { v: result.weeks.toLocaleString(), l: 'Weeks' },
-                    { v: result.days.toLocaleString(),  l: 'Days' },
-                    { v: result.hours.toLocaleString(), l: 'Hours' },
-                    { v: result.minutes.toLocaleString(), l: 'Minutes' },
+                    { v: result.years,   l: result.years === 1 ? 'Year' : 'Years' },
+                    { v: result.months,  l: result.months === 1 ? 'Month' : 'Months' },
+                    { v: result.weeks.toLocaleString(), l: result.weeks === 1 ? 'Week' : 'Weeks' },
+                    { v: result.days.toLocaleString(),  l: result.days === 1 ? 'Day' : 'Days' },
+                    { v: result.hours.toLocaleString(), l: result.hours === 1 ? 'Hour' : 'Hours' },
+                    { v: result.minutes.toLocaleString(), l: result.minutes === 1 ? 'Minute' : 'Minutes' },
                   ].map(s => (
                     <div className="result-stat" key={s.l}>
                       <div className="result-stat-value">{s.v}</div>
@@ -74,8 +74,8 @@ export default function AgeCalculatorClient() {
                     </div>
                   ))}
                 </div>
-                <div className="alert alert-info">
-                  🎉 Your next birthday is in <strong>{result.nextBirthday} days</strong>!
+                <div className="alert alert-info mt-4">
+                  <span>🎉</span> Your next birthday is in <strong>{result.nextBirthday} days</strong>!
                 </div>
               </div>
             )}

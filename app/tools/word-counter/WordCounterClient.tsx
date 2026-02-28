@@ -11,13 +11,21 @@ export default function WordCounterClient() {
   const chars     = text.length;
   const charsNoSp = text.replace(/\s/g, '').length;
   const sentences = text.trim() === '' ? 0 : (text.match(/[.!?]+/g) || []).length;
-  const paragraphs= text.trim() === '' ? 0 : text.split(/\n\s*\n/).filter(p => p.trim()).length;
+  const paragraphs= text.trim() === '' ? 0 : text.split(/\r?\n/).filter(p => p.trim()).length;
   const readTime  =
     words === 0     ? '0s' :
     words < 30      ? `${Math.ceil((words / 225) * 60)}s` :
                       `${Math.ceil(words / 225)}m`;
 
+  const [copied, setCopied] = useState(false);
+
   const clear = useCallback(() => setText(''), []);
+  const copy = async () => {
+    if (!text) return;
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <>
@@ -51,9 +59,12 @@ export default function WordCounterClient() {
               />
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
-              <button className="btn btn-ghost btn-sm" onClick={clear} aria-label="Clear text">
-                Clear ✕
+            <div className="btn-actions-group">
+              <button className="btn btn-secondary btn-sm" onClick={clear} aria-label="Clear text">
+                Clear
+              </button>
+              <button className={`btn btn-secondary btn-sm ${copied ? 'text-primary' : ''}`} onClick={copy} aria-label="Copy text">
+                {copied ? '✓' : '📋'} {copied ? 'Copied' : 'Copy'}
               </button>
             </div>
 

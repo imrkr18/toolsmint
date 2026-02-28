@@ -82,18 +82,27 @@ export default function CaseConverterClient() {
             </div>
 
             {input && (
-              <div>
-                <div className="output-row">
-                  <label>Result</label>
-                  <button
-                    className={`btn-icon ${copied ? 'success' : ''}`}
-                    onClick={copy}
-                    aria-label="Copy result"
-                  >
-                    {copied ? '✓ Copied!' : 'Copy'}
-                  </button>
+              <div aria-live="polite" className="mt-6">
+                <div className="output-row-header">
+                  <label className="mb-0">Converted Result</label>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      className="btn btn-secondary btn-sm"
+                      onClick={() => setInput('')}
+                      aria-label="Clear input"
+                    >
+                      Clear
+                    </button>
+                    <button
+                      className={`btn btn-secondary btn-sm ${copied ? 'success' : ''}`}
+                      onClick={copy}
+                      aria-label="Copy result"
+                    >
+                      {copied ? '✓' : '📋'} {copied ? 'Copied!' : 'Copy'}
+                    </button>
+                  </div>
                 </div>
-                <div className="output-panel" aria-live="polite" aria-label="Converted text">
+                <div className="output-panel">
                   {output}
                 </div>
               </div>

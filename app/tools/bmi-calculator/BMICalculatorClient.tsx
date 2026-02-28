@@ -20,12 +20,21 @@ export default function BMICalculatorClient() {
   const [heightFt, setHeightFt] = useState('');
   const [heightIn, setHeightIn] = useState('');
 
+  const handleUnitChange = (u: Unit) => {
+    setUnit(u);
+    setWeight('');
+    setHeight('');
+    setHeightFt('');
+    setHeightIn('');
+  };
+
   let bmi: number | null = null;
   if (unit === 'metric') {
-    const w = parseFloat(weight), h = parseFloat(height) / 100;
+    const w = parseFloat(weight || '0'), h = parseFloat(height || '0') / 100;
     if (w > 0 && h > 0) bmi = w / (h * h);
   } else {
-    const w = parseFloat(weight), h = (parseFloat(heightFt) * 12) + parseFloat(heightIn || '0');
+    const w = parseFloat(weight || '0'), ft = parseFloat(heightFt || '0'), inc = parseFloat(heightIn || '0');
+    const h = (ft * 12) + inc;
     if (w > 0 && h > 0) bmi = (w / (h * h)) * 703;
   }
 
@@ -51,7 +60,7 @@ export default function BMICalculatorClient() {
               <div className="checkbox-group">
                 {(['metric', 'imperial'] as Unit[]).map(u => (
                   <label key={u} className="checkbox-item">
-                    <input type="radio" name="unit" checked={unit === u} onChange={() => setUnit(u)} />
+                    <input type="radio" name="unit" checked={unit === u} onChange={() => handleUnitChange(u)} />
                     {u === 'metric' ? 'Metric (kg / cm)' : 'Imperial (lbs / ft)'}
                   </label>
                 ))}
@@ -80,20 +89,40 @@ export default function BMICalculatorClient() {
             </div>
 
             {bmi && cat && (
-              <div aria-live="polite" style={{ marginTop: '8px' }}>
-                <div style={{ background: 'var(--bg-elevated)', border: `1px solid ${cat.color}33`, borderRadius: 'var(--radius-lg)', padding: '28px', textAlign: 'center', marginBottom: '20px' }}>
-                  <div style={{ fontSize: '3.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)', color: cat.color, lineHeight: 1, marginBottom: '8px' }}>
+              <div aria-live="polite" className="mt-6">
+                <div className="result-card" style={{ borderColor: `${cat.color}33` }}>
+                  <div className="result-card-value" style={{ color: cat.color, background: 'none', WebkitTextFillColor: 'initial' }}>
                     {bmi.toFixed(1)}
                   </div>
-                  <div style={{ fontSize: '1.1rem', fontWeight: 700, color: cat.color, marginBottom: '10px' }}>{cat.label}</div>
-                  <div style={{ height: '8px', background: 'var(--bg-input)', borderRadius: '99px', margin: '16px auto', maxWidth: '320px', overflow: 'hidden' }}>
+                  <div className="result-card-label" style={{ color: cat.color }}>{cat.label}</div>
+                  
+                  <div style={{ height: '8px', background: 'var(--bg-input)', borderRadius: '99px', margin: '16px auto 20px', maxWidth: '320px', overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: `${Math.min((bmi / 40) * 100, 100)}%`, background: cat.color, borderRadius: '99px', transition: 'width 0.5s ease' }} />
                   </div>
-                  <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{cat.tip}</p>
+                  
+                  <p className="result-card-tip">{cat.tip}</p>
+
+                  <div className="mt-6">
+                    <button 
+                      className="btn btn-secondary btn-sm"
+                      onClick={() => {
+                        const text = `My BMI is ${bmi!.toFixed(1)} (${cat!.label}). Calculated on ToolMint.`;
+                        navigator.clipboard.writeText(text);
+                      }}
+                    >
+                      <span>📋</span> Copy Result
+                    </button>
+                  </div>
                 </div>
+
                 <div className="result-grid">
-                  {[{ range: '< 18.5', label: 'Underweight', c: '#3B82F6' }, { range: '18.5–24.9', label: 'Normal', c: '#00C896' }, { range: '25–29.9', label: 'Overweight', c: '#F59E0B' }, { range: '≥ 30', label: 'Obese', c: '#EF4444' }].map(r => (
-                    <div key={r.label} className="result-stat" style={{ borderColor: cat.label === r.label ? r.c + '66' : 'var(--border)' }}>
+                  {[
+                    { range: '< 18.5', label: 'Underweight', c: '#3B82F6' },
+                    { range: '18.5–24.9', label: 'Normal', c: '#00C896' },
+                    { range: '25–29.9', label: 'Overweight', c: '#F59E0B' },
+                    { range: '≥ 30', label: 'Obese', c: '#EF4444' }
+                  ].map(r => (
+                    <div key={r.label} className="result-stat" style={{ borderColor: cat.label === r.label ? r.c + '66' : 'var(--border)', background: cat.label === r.label ? 'var(--bg-elevated)' : 'transparent' }}>
                       <div className="result-stat-value" style={{ fontSize: '0.875rem', color: r.c }}>{r.range}</div>
                       <div className="result-stat-label">{r.label}</div>
                     </div>

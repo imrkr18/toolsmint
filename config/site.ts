@@ -5,11 +5,11 @@
  * ╚══════════════════════════════════════╝
  */
 export const SITE_CONFIG = {
-    name: "ToolMint",
+    name: "ToolsMint",
     tagline: "Fresh Tools for Every Task",
     description: "Free, fast, and beautifully designed online tools for everyday tasks — word counters, calculators, generators, converters and more. No signup needed.",
-    url: "https://toolmint.io",
-    twitter: "@toolmint",
+    url: "https://toolsmint.com",
+    twitter: "@toolsmint",
     locale: "en_US",
     year: new Date().getFullYear(),
 } as const;
@@ -25,10 +25,10 @@ export type Tool = {
     keywords: string[];
 };
 
-export type ToolCategory = "Text" | "Calculator" | "Security" | "Generator" | "Health" | "Developer";
+export type ToolCategory = "Text" | "Calculator" | "Security" | "Generator" | "Health" | "Developer" | "Converter";
 
 export const TOOL_CATEGORIES: ToolCategory[] = [
-    "Text", "Calculator", "Security", "Generator", "Health", "Developer",
+    "Text", "Calculator", "Security", "Generator", "Health", "Developer", "Converter"
 ];
 
 export const TOOLS: Tool[] = [
@@ -112,4 +112,34 @@ export const TOOLS: Tool[] = [
         category: "Developer",
         keywords: ["JSON formatter", "JSON validator", "JSON beautifier", "format JSON online", "JSON minifier", "JSON pretty print"],
     },
+    {
+        id: "weight-converter",
+        name: "Weight Converter",
+        slug: "converter/weight",
+        description: "Convert instantly between Kilograms, Pounds, Ounces, Grams and more.",
+        longDesc: "A powerful unit converter for all weight and mass measurements. Instantly convert Kilograms (kg) to Pounds (lbs), Grams to Ounces, Metric Tons to pounds, and more with exact precision.",
+        icon: "⚖️",
+        category: "Converter",
+        keywords: ["weight converter", "kg to lbs", "lbs to kg", "grams to ounces", "mass converter", "kilograms to pounds"],
+    },
+    {
+        id: "length-converter",
+        name: "Length Converter",
+        slug: "converter/length",
+        description: "Convert distance and length between Meters, Feet, Inches, Miles and more.",
+        longDesc: "Accurately convert length and distance measurements. Easily translate Meters to Feet, Kilometers to Miles, Centimeters to Inches, and Yards with instant real-time calculation.",
+        icon: "📏",
+        category: "Converter",
+        keywords: ["length converter", "meters to feet", "km to miles", "cm to inches", "distance converter", "inches to cm"],
+    },
+    {
+        id: "temperature-converter",
+        name: "Temperature Converter",
+        slug: "converter/temperature",
+        description: "Convert accurately between Celsius, Fahrenheit, and Kelvin.",
+        longDesc: "Instantly convert temperatures between Celsius (°C), Fahrenheit (°F), and Kelvin (K). Essential for science, weather, cooking, and international travel calculations.",
+        icon: "🌡️",
+        category: "Converter",
+        keywords: ["temperature converter", "celsius to fahrenheit", "fahrenheit to celsius", "c to f calculator", "kelvin converter", "convert temperature"],
+    }
 ];

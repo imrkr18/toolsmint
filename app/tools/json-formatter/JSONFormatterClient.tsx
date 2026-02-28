@@ -56,9 +56,9 @@ export default function JSONFormatterClient() {
             <AdSlot type="banner" />
 
             <div className="form-group">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <label htmlFor="json-input" style={{ margin: 0 }}>Paste JSON</label>
-                <button className="btn-icon" onClick={clear}>Clear ✕</button>
+              <div className="output-row-header">
+                <label htmlFor="json-input" className="mb-0">Paste JSON</label>
+                <button type="button" className="btn btn-secondary btn-sm" onClick={clear}>Clear</button>
               </div>
               <textarea
                 id="json-input" value={input}
@@ -84,10 +84,12 @@ export default function JSONFormatterClient() {
             </div>
 
             {output && (
-              <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                  Formatted JSON {!error && <span style={{ color: 'var(--success)', fontWeight: 600 }}>✓ Valid</span>}
-                </label>
+              <div className="mt-6">
+                <div className="output-row-header">
+                  <label className="mb-0">
+                    Formatted JSON {!error && <span style={{ color: 'var(--success)', fontWeight: 600 }}>✓ Valid</span>}
+                  </label>
+                </div>
                 <div
                   className="output-panel mono"
                   aria-live="polite"

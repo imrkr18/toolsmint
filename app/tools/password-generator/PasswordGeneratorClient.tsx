@@ -78,23 +78,28 @@ export default function PasswordGeneratorClient() {
             <AdSlot type="banner" />
 
             {/* Output */}
-            <div style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: '24px', marginBottom: '24px' }}>
-              <div className="output-row mb-4">
-                <div style={{ fontFamily: 'monospace', fontSize: '1.15rem', wordBreak: 'break-all', color: 'var(--text-primary)', letterSpacing: '0.04em' }}>
-                  {password}
-                </div>
-                <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
-                  <button className={`btn-icon ${copied ? 'success' : ''}`} onClick={copy}>{copied ? '✓ Copied' : 'Copy'}</button>
+            <div className="result-card" style={{ textAlign: 'left' }}>
+              <div className="output-row-header">
+                <span className="text-secondary font-medium">Generated Password</span>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button className={`btn-icon ${copied ? 'success' : ''}`} onClick={copy} aria-label="Copy password">
+                    {copied ? '✓' : '📋'}
+                  </button>
                   <button className="btn-icon" onClick={generate} aria-label="Refresh password">↻</button>
                 </div>
               </div>
+              
+              <div className="output-panel mono mb-4" style={{ fontSize: '1.15rem' }}>
+                {password}
+              </div>
+
               {/* Strength bar */}
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Strength</span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Security Strength</span>
                   <span style={{ fontSize: '0.75rem', color: str.color, fontWeight: 600 }}>{str.label}</span>
                 </div>
-                <div style={{ height: '5px', background: 'var(--bg-input)', borderRadius: '99px', overflow: 'hidden' }}>
+                <div style={{ height: '6px', background: 'var(--bg-input)', borderRadius: '99px', overflow: 'hidden' }}>
                   <div style={{ height: '100%', width: str.width, background: str.color, borderRadius: '99px', transition: 'width 0.4s ease' }} />
                 </div>
               </div>
@@ -110,10 +115,10 @@ export default function PasswordGeneratorClient() {
               <label>Include Characters</label>
               <div className="checkbox-group">
                 {[
-                  { label: 'Uppercase (A-Z)', val: upper, set: setUpper },
-                  { label: 'Lowercase (a-z)', val: lower, set: setLower },
-                  { label: 'Numbers (0-9)',   val: numbers, set: setNumbers },
-                  { label: 'Symbols (!@#)',   val: symbols, set: setSymbols },
+                  { label: 'Uppercase (A-Z)', val: upper, set: (v: boolean) => { if (!v && !lower && !numbers && !symbols) return; setUpper(v); } },
+                  { label: 'Lowercase (a-z)', val: lower, set: (v: boolean) => { if (!v && !upper && !numbers && !symbols) return; setLower(v); } },
+                  { label: 'Numbers (0-9)',   val: numbers, set: (v: boolean) => { if (!v && !upper && !lower && !symbols) return; setNumbers(v); } },
+                  { label: 'Symbols (!@#)',   val: symbols, set: (v: boolean) => { if (!v && !upper && !lower && !numbers) return; setSymbols(v); } },
                 ].map(o => (
                   <label key={o.label} className="checkbox-item">
                     <input type="checkbox" checked={o.val} onChange={e => o.set(e.target.checked)} />

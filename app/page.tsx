@@ -3,7 +3,8 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AdSlot from '@/components/AdSlot';
-import { SITE_CONFIG, TOOLS } from '@/config/site';
+import { SITE_CONFIG, TOOLS, TOOL_CATEGORIES } from '@/config/site';
+import ToolDirectory from '@/components/ToolDirectory';
 
 export const metadata: Metadata = {
   title: `${SITE_CONFIG.name} — Free Online Tools for Everyday Tasks`,
@@ -88,23 +89,7 @@ export default function HomePage() {
               <h2>Pick Your Tool, Get It Done</h2>
               <p>From text and math to QR codes and JSON — everything you need in one place.</p>
             </div>
-            <div className="tools-grid" role="list" aria-label="Available tools">
-              {TOOLS.map((tool) => (
-                <Link
-                  key={tool.id}
-                  href={`/tools/${tool.slug}`}
-                  className="card tool-card"
-                  role="listitem"
-                  aria-label={tool.name}
-                >
-                  <div className="tool-icon" aria-hidden="true">{tool.icon}</div>
-                  <span className="tool-cat-badge">{tool.category}</span>
-                  <div className="tool-name">{tool.name}</div>
-                  <p className="tool-desc">{tool.description}</p>
-                  <div className="tool-arrow" aria-hidden="true">→</div>
-                </Link>
-              ))}
-            </div>
+            <ToolDirectory tools={TOOLS} categories={TOOL_CATEGORIES} />
           </div>
         </section>
 

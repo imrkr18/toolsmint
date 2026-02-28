@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { SITE_CONFIG } from "@/config/site";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -20,6 +21,9 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
   creator: SITE_CONFIG.name,
   publisher: SITE_CONFIG.name,
+  verification: {
+    google: "YOUR_GOOGLE_SITE_VERIFICATION_ID", // TODO: Replace with actual ID
+  },
   robots: {
     index: true, follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
@@ -81,6 +85,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>
+        {/* Google AdSense Script */}
+        <Script 
+          id="adsbygoogle-init"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_PUBLISHER_ID"
+        />
       </body>
     </html>
   );

@@ -4,7 +4,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AdSlot from '@/components/AdSlot';
 
-export default function JSONFormatterClient() {
+import React from 'react';
+
+export default function JSONFormatterClient({ children }: { children?: React.ReactNode }) {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError]   = useState('');
@@ -111,6 +113,7 @@ export default function JSONFormatterClient() {
                 ))}
               </ol>
             </section>
+            {children}
           </div>
         </main>
       </div>

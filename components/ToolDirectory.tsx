@@ -117,7 +117,7 @@ export default function ToolDirectory({ tools, categories }: ToolDirectoryProps)
           {filteredAndSortedTools.map((tool) => (
             <Link
               key={tool.id}
-              href={`/tools/${tool.slug}`}
+              href={`/${tool.slug}`}
               className="card tool-card"
               role="listitem"
               aria-label={tool.name}

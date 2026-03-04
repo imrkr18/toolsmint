@@ -4,7 +4,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AdSlot from '@/components/AdSlot';
 
-export default function AgeCalculatorClient() {
+import React from 'react';
+
+export default function AgeCalculatorClient({ children }: { children?: React.ReactNode }) {
   const [dob, setDob] = useState('');
   const [result, setResult] = useState<null | {
     years: number; months: number; weeks: number;
@@ -90,6 +92,7 @@ export default function AgeCalculatorClient() {
                 ))}
               </ol>
             </section>
+            {children}
           </div>
         </main>
       </div>

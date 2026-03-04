@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CONVERTERS } from "@/config/converters";
-import { SITE_CONFIG } from "@/config/site";
+import { SITE_CONFIG, TOOLS } from "@/config/site";
 import ConverterClient from "./ConverterClient";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AdSlot from "@/components/AdSlot";
+import ToolSEOContent from "@/components/ToolSEOContent";
+import RelatedTools from "@/components/RelatedTools";
 
 type Props = {
     params: Promise<{
@@ -25,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (slug.length === 0) {
         const title = `${catData.name} Converter | ${SITE_CONFIG.name}`;
         const description = `Free online ${catData.name.toLowerCase()} converter. Instantly convert between ${catData.units.map(u => u.name).join(', ')} and other measurements.`;
-        const cleanUrl = `${SITE_CONFIG.url}/tools/converter/${category}`;
+        const cleanUrl = `${SITE_CONFIG.url}/converter/${category}`;
 
         return {
             title,
@@ -81,7 +83,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? `Exactly how much is ${value} ${fromUnit.name} in ${toUnit.name}? Fast, free, and accurate conversion calculator for ${value} ${fromUnit.symbol} to ${toUnit.symbol}.`
         : `Free online ${fromUnit.name} to ${toUnit.name} converter. Instantly convert ${fromUnit.symbol} to ${toUnit.symbol} and other ${catData.name.toLowerCase()} measurements.`;
 
-    const cleanUrl = `${SITE_CONFIG.url}/tools/converter/${category}/${slug[0]}`;
+    const cleanUrl = `${SITE_CONFIG.url}/converter/${category}/${slug[0]}`;
 
     return {
         title,
@@ -234,6 +236,19 @@ export default async function ConverterPage({ params }: Props) {
                                 </div>
                             </div>
                         </section>
+                        
+                        {(() => {
+                            const tool = TOOLS.find(t => t.id === `${category}-converter`);
+                            if (tool) {
+                                return (
+                                    <>
+                                        <ToolSEOContent tool={tool} />
+                                        <RelatedTools currentTool={tool} />
+                                    </>
+                                );
+                            }
+                            return null;
+                        })()}
                     </div>
                 </main>
             </div>

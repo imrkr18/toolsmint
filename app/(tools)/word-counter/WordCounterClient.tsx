@@ -4,7 +4,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AdSlot from '@/components/AdSlot';
 
-export default function WordCounterClient() {
+import React from 'react';
+
+export default function WordCounterClient({ children }: { children?: React.ReactNode }) {
   const [text, setText] = useState('');
 
   const words     = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
@@ -101,6 +103,7 @@ export default function WordCounterClient() {
                 ))}
               </ol>
             </section>
+            {children}
           </div>
         </main>
       </div>

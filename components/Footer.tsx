@@ -13,7 +13,7 @@ export default function Footer() {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/#tools">All Tools</Link></li>
             {TOOLS.slice(0, 4).map(t => (
-              <li key={t.id}><Link href={`/tools/${t.slug}`}>{t.name}</Link></li>
+              <li key={t.id}><Link href={`/${t.slug}`}>{t.name}</Link></li>
             ))}
           </ul>
         </div>

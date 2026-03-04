@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import { SITE_CONFIG, TOOLS } from '@/config/site';
-import QRGeneratorClient from './QRGeneratorClient';
+import WordCounterClient from './WordCounterClient';
+import ToolSEOContent from '@/components/ToolSEOContent';
+import RelatedTools from '@/components/RelatedTools';
 
-const tool = TOOLS.find(t => t.id === 'qr-generator')!;
-const url  = `${SITE_CONFIG.url}/tools/${tool.slug}`;
+const tool = TOOLS.find(t => t.id === 'word-counter')!;
+const url  = `${SITE_CONFIG.url}/${tool.slug}`;
 
 export const metadata: Metadata = {
   title: `${tool.name} — Free Online ${tool.name}`,
@@ -29,7 +31,10 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <QRGeneratorClient />
+      <WordCounterClient>
+        <ToolSEOContent tool={tool} />
+        <RelatedTools currentTool={tool} />
+      </WordCounterClient>
     </>
   );
 }

@@ -28,7 +28,7 @@ const jsonLd = {
     position: i + 1,
     name: t.name,
     description: t.description,
-    url: `${SITE_CONFIG.url}/tools/${t.slug}`,
+    url: `${SITE_CONFIG.url}/${t.slug}`,
   })),
 };
 
@@ -87,7 +87,7 @@ export default function HomePage() {
             <div className="section-header">
               <span className="section-tag">All Tools</span>
               <h2>Pick Your Tool, Get It Done</h2>
-              <p>From text and math to QR codes and JSON — everything you need in one place.</p>
+              <p>From text and math to QR Code and JSON — everything you need in one place.</p>
             </div>
             <ToolDirectory tools={TOOLS} categories={TOOL_CATEGORIES} />
           </div>

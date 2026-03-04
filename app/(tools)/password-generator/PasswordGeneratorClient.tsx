@@ -40,7 +40,9 @@ function strength(pw: string): { label: string; color: string; width: string } {
   return { label: 'Very Strong', color: '#00C896', width: '100%' };
 }
 
-export default function PasswordGeneratorClient() {
+import React from 'react';
+
+export default function PasswordGeneratorClient({ children }: { children?: React.ReactNode }) {
   const [length, setLength]   = useState(16);
   const [upper, setUpper]     = useState(true);
   const [lower, setLower]     = useState(true);
@@ -145,6 +147,7 @@ export default function PasswordGeneratorClient() {
                 ))}
               </ol>
             </section>
+            {children}
           </div>
         </main>
       </div>

@@ -254,8 +254,9 @@ body::before {
   border-radius: var(--radius-full);
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-secondary);
-  transition: color var(--tr), background var(--tr);
+  color: var(--text-primary);
+  opacity: 0.9;
+  transition: color var(--tr), background var(--tr), opacity var(--tr);
 }
 
 .nav-links a:hover {
@@ -644,6 +645,7 @@ body::before {
   margin-top: 18px;
   position: relative;
   transition: background var(--tr), color var(--tr), transform var(--tr);
+  align-self: flex-end;
 }
 
 .tool-card:hover .tool-arrow {
@@ -1536,4 +1538,189 @@ input[type="checkbox"] {
 
 .mt-6 {
   margin-top: 24px;
+}
+
+/* ═══ SEO CONTENT AESTHETICS ═══ */
+.seo-section {
+  max-width: 960px;
+  margin: 64px auto 24px;
+  padding-top: 56px;
+  border-top: 1px solid var(--border);
+}
+
+.seo-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.seo-header h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.seo-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.seo-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+@media (max-width: 768px) {
+  .seo-blocks {
+    grid-template-columns: 1fr;
+  }
+}
+
+.seo-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: border-color var(--tr), transform var(--tr), box-shadow var(--tr);
+}
+
+.seo-block:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.seo-block h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.seo-block p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.seo-block.full-width {
+  grid-column: 1 / -1;
+  text-align: center;
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seo-block.full-width p {
+  max-width: 800px;
+}
+
+/* ═══ FAQ SECTION ═══ */
+.faq-section {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.faq-header h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.faq-header p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: background var(--tr), border-color var(--tr);
+}
+
+.faq-item:hover {
+  background: var(--bg-card);
+  border-color: var(--border-hover);
+}
+
+.faq-q {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.faq-icon-q {
+  color: var(--brand);
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-top: -1px;
+}
+
+.faq-a {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.faq-icon-a {
+  color: transparent;
+  font-size: 1.25rem;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ═══ RELATED TOOLS ═══ */
+.related-tools-section {
+  max-width: 1000px;
+  margin: 56px auto 0;
+  padding-top: 56px;
+  border-top: 1px solid var(--border);
+}
+
+.related-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.related-header h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.related-header p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
 }

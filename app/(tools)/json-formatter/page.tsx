@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import { SITE_CONFIG, TOOLS } from '@/config/site';
-import BMICalculatorClient from './BMICalculatorClient';
+import JSONFormatterClient from './JSONFormatterClient';
+import ToolSEOContent from '@/components/ToolSEOContent';
+import RelatedTools from '@/components/RelatedTools';
 
-const tool = TOOLS.find(t => t.id === 'bmi-calculator')!;
-const url  = `${SITE_CONFIG.url}/tools/${tool.slug}`;
+const tool = TOOLS.find(t => t.id === 'json-formatter')!;
+const url  = `${SITE_CONFIG.url}/${tool.slug}`;
 
 export const metadata: Metadata = {
   title: `${tool.name} — Free Online ${tool.name}`,
@@ -19,7 +21,7 @@ const jsonLd = {
   name: `${tool.name} — ${SITE_CONFIG.name}`,
   description: tool.longDesc,
   url,
-  applicationCategory: 'HealthApplication',
+  applicationCategory: 'DeveloperApplication',
   operatingSystem: 'Any',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   featureList: tool.keywords,
@@ -29,7 +31,10 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <BMICalculatorClient />
+      <JSONFormatterClient>
+        <ToolSEOContent tool={tool} />
+        <RelatedTools currentTool={tool} />
+      </JSONFormatterClient>
     </>
   );
 }

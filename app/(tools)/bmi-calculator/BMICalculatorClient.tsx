@@ -13,7 +13,9 @@ const CATEGORIES = [
   { max: Infinity, label: 'Obese', color: '#EF4444', tip: 'Consult a healthcare professional.' },
 ];
 
-export default function BMICalculatorClient() {
+import React from 'react';
+
+export default function BMICalculatorClient({ children }: { children?: React.ReactNode }) {
   const [unit, setUnit] = useState<Unit>('metric');
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
@@ -141,6 +143,7 @@ export default function BMICalculatorClient() {
                 ))}
               </ol>
             </section>
+            {children}
           </div>
         </main>
       </div>

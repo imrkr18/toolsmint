@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Core Tools
     const toolUrls: MetadataRoute.Sitemap = TOOLS.map(tool => ({
-        url: `${SITE_CONFIG.url}/tools/${tool.slug}`,
+        url: `${SITE_CONFIG.url}/${tool.slug}`,
         lastModified: now,
         changeFrequency: 'monthly',
         priority: 0.8,

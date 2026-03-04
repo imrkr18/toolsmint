@@ -9,7 +9,9 @@ function qrUrl(text: string, size: number) {
   return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`;
 }
 
-export default function QRGeneratorClient() {
+import React from 'react';
+
+export default function QRGeneratorClient({ children }: { children?: React.ReactNode }) {
   const [text, setText] = useState('');
   const [size, setSize] = useState(256);
   const [generated, setGenerated] = useState('');
@@ -96,6 +98,7 @@ export default function QRGeneratorClient() {
                 ))}
               </ol>
             </section>
+            {children}
           </div>
         </main>
       </div>

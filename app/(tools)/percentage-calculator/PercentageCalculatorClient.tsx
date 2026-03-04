@@ -4,7 +4,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AdSlot from '@/components/AdSlot';
 
-export default function PercentageCalculatorClient() {
+import React from 'react';
+
+export default function PercentageCalculatorClient({ children }: { children?: React.ReactNode }) {
   // Calculator 1: X% of Y
   const [p1, setP1] = useState(''); const [n1, setN1] = useState('');
   const r1 = p1 && n1 ? ((+p1 / 100) * +n1).toFixed(4).replace(/\.?0+$/, '') : '';
@@ -119,6 +121,7 @@ export default function PercentageCalculatorClient() {
                 ))}
               </ol>
             </section>
+            {children}
           </div>
         </main>
       </div>

@@ -21,7 +21,9 @@ function convert(text: string, c: CaseType): string {
   }
 }
 
-export default function CaseConverterClient() {
+import React from 'react';
+
+export default function CaseConverterClient({ children }: { children?: React.ReactNode }) {
   const [input, setInput] = useState('');
   const [selected, setSelected] = useState<CaseType>('UPPERCASE');
   const [copied, setCopied] = useState(false);
@@ -125,6 +127,7 @@ export default function CaseConverterClient() {
                 ))}
               </ol>
             </section>
+            {children}
           </div>
         </main>
       </div>

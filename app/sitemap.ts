@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // 1. Add the main converter directory
     converterUrls.push({
-        url: `${SITE_CONFIG.url}/tools/converter`,
+        url: `${SITE_CONFIG.url}/converter`,
         lastModified: now,
         changeFrequency: 'weekly',
         priority: 0.9,
@@ -36,18 +36,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
                 const fromUnitStr = units[i].id;
                 const toUnitStr = units[j].id;
 
-                // A. Base conversion route (e.g. /tools/converter/weight/kg-to-lbs)
+                // A. Base conversion route (e.g. /converter/weight/kg-to-lbs)
                 converterUrls.push({
-                    url: `${SITE_CONFIG.url}/tools/converter/${categoryId}/${fromUnitStr}-to-${toUnitStr}`,
+                    url: `${SITE_CONFIG.url}/converter/${categoryId}/${fromUnitStr}-to-${toUnitStr}`,
                     lastModified: now,
                     changeFrequency: 'monthly',
                     priority: 0.7, // High priority for base keywords
                 });
 
-                // B. Value-specific routes (e.g. /tools/converter/weight/10-kg-to-lbs)
+                // B. Value-specific routes (e.g. /converter/weight/10-kg-to-lbs)
                 for (const value of SITEMAP_VALUES) {
                     converterUrls.push({
-                        url: `${SITE_CONFIG.url}/tools/converter/${categoryId}/${value}-${fromUnitStr}-to-${toUnitStr}`,
+                        url: `${SITE_CONFIG.url}/converter/${categoryId}/${value}-${fromUnitStr}-to-${toUnitStr}`,
                         lastModified: now,
                         changeFrequency: 'monthly',
                         priority: 0.5, // Lower priority for long-tail variations

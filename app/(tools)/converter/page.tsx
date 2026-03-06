@@ -9,7 +9,7 @@ export const metadata = {
     title: `Unit Converters | ${SITE_CONFIG.name}`,
     description: "Free online unit converters for weight, mass, length, distance, and temperature. Fast, accurate, and easy to use.",
     alternates: {
-        canonical: `${SITE_CONFIG.url}/tools/converter`,
+        canonical: `${SITE_CONFIG.url}/converter`,
     },
 };
 
@@ -37,7 +37,7 @@ export default function ConverterDirectoryPage() {
                             {categories.map((category) => (
                                 <Link
                                     key={category.id}
-                                    href={`/tools/converter/${category.id}`}
+                                    href={`/converter/${category.id}`}
                                     className="group flex flex-col justify-between rounded-xl border bg-card p-6 shadow-sm transition-all hover:shadow-md hover:border-primary/50 relative overflow-hidden"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -68,14 +68,14 @@ export default function ConverterDirectoryPage() {
                             <h2 style={{ textAlign: 'center', marginBottom: '32px' }}>Popular Conversions</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {/* Hardcoded high-value internal links to pass PageRank to deep dynamic pages */}
-                                <Link href="/tools/converter/weight/kg-to-lbs" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">kg to lbs</Link>
-                                <Link href="/tools/converter/weight/1-kg-to-grams" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">1 kg to grams</Link>
-                                <Link href="/tools/converter/length/meters-to-feet" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">meters to feet</Link>
-                                <Link href="/tools/converter/length/100-cm-to-inches" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">100 cm to inches</Link>
-                                <Link href="/tools/converter/temperature/celsius-to-fahrenheit" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">Celsius to Fahrenheit</Link>
-                                <Link href="/tools/converter/temperature/100-celsius-to-fahrenheit" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">100 °C to °F</Link>
-                                <Link href="/tools/converter/weight/grams-to-ounces" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">grams to ounces</Link>
-                                <Link href="/tools/converter/length/km-to-miles" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">km to miles</Link>
+                                <Link href="/converter/weight/kg-to-lbs" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">kg to lbs</Link>
+                                <Link href="/converter/weight/1-kg-to-grams" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">1 kg to grams</Link>
+                                <Link href="/converter/length/meters-to-feet" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">meters to feet</Link>
+                                <Link href="/converter/length/100-cm-to-inches" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">100 cm to inches</Link>
+                                <Link href="/converter/temperature/celsius-to-fahrenheit" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">Celsius to Fahrenheit</Link>
+                                <Link href="/converter/temperature/100-celsius-to-fahrenheit" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">100 °C to °F</Link>
+                                <Link href="/converter/weight/grams-to-ounces" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">grams to ounces</Link>
+                                <Link href="/converter/length/km-to-miles" className="bg-card hover:bg-muted border rounded-xl p-4 text-center transition-colors font-medium">km to miles</Link>
                             </div>
                         </section>
                     </div>

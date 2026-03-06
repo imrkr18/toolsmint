@@ -50,7 +50,7 @@ export default function ConverterClient({
         // Programmatically push to the specific value route so URL matches the state
         // This is key for letting users share exact conversions
         if (!isInitial && valStr !== "") {
-            const newSlug = `/tools/converter/${category.id}/${valStr}-${fromU}-to-${toU}`;
+            const newSlug = `/converter/${category.id}/${valStr}-${fromU}-to-${toU}`;
             router.replace(newSlug, { scroll: false });
         }
     };

@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CONVERTERS } from "@/config/converters";
+import { CONVERTERS, SITEMAP_VALUES, POPULAR_CONVERSIONS } from "@/config/converters";
 import { SITE_CONFIG, TOOLS } from "@/config/site";
+import Link from "next/link";
 import ConverterClient from "./ConverterClient";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -187,7 +188,7 @@ export default async function ConverterPage({ params }: Props) {
                     <div className="tool-container">
                         <nav className="breadcrumb">
                             <a href="/">Home</a><span className="breadcrumb-sep">›</span>
-                            <a href="/tools/converter">Converters</a><span className="breadcrumb-sep">›</span>
+                            <a href="/converter">Converters</a><span className="breadcrumb-sep">›</span>
                             <span aria-current="page">{catData.name} Converter</span>
                         </nav>
 
@@ -235,6 +236,67 @@ export default async function ConverterPage({ params }: Props) {
                                     </p>
                                 </div>
                             </div>
+                        </section>
+
+                        {/* Programmatic SEO Links */}
+                        <section className="how-to" style={{ marginTop: '40px' }}>
+                            {slug.length === 0 && (
+                                <>
+                                    <h2 style={{ textAlign: 'center', marginBottom: '32px' }}>Most Popular {catData.name} Conversions</h2>
+                                    <div className="category-pills" style={{ justifyContent: 'center' }}>
+                                        {POPULAR_CONVERSIONS[category]?.map(convStr => {
+                                            const [fromU, toU] = convStr.split('-to-');
+                                            const fromName = catData.units.find(u => u.id === fromU)?.name;
+                                            const toName = catData.units.find(u => u.id === toU)?.name;
+                                            if (!fromName || !toName) return null;
+
+                                            return (
+                                                <Link 
+                                                    key={convStr}
+                                                    href={`/converter/${category}/${convStr}`} 
+                                                    className="category-pill"
+                                                >
+                                                    {fromName} to {toName}
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                </>
+                            )}
+
+                            {slug.length === 1 && !isSpecificValue && (
+                                <>
+                                    <h2 style={{ textAlign: 'center', marginBottom: '32px' }}>Popular {fromUnitDef.name} to {toUnitDef.name} Conversions</h2>
+                                    <div className="category-pills" style={{ justifyContent: 'center' }}>
+                                        {SITEMAP_VALUES.map(val => (
+                                            <Link 
+                                                key={val}
+                                                href={`/converter/${category}/${val}-${fromUnitDef.id}-to-${toUnitDef.id}`} 
+                                                className="category-pill"
+                                            >
+                                                {val} {fromUnitDef.symbol} to {toUnitDef.symbol}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+
+                            {slug.length === 1 && isSpecificValue && (
+                                <>
+                                    <h2 style={{ textAlign: 'center', marginBottom: '32px' }}>Related {fromUnitDef.name} to {toUnitDef.name} Conversions</h2>
+                                    <div className="category-pills" style={{ justifyContent: 'center' }}>
+                                        {SITEMAP_VALUES.slice(0, 12).map(val => (
+                                            <Link 
+                                                key={val}
+                                                href={`/converter/${category}/${val}-${fromUnitDef.id}-to-${toUnitDef.id}`} 
+                                                className={`category-pill ${val === initialValue ? 'active' : ''}`}
+                                            >
+                                                {val} {fromUnitDef.symbol}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
                         </section>
                         
                         {(() => {

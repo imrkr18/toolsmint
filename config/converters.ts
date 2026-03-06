@@ -21,6 +21,23 @@ export const SITEMAP_VALUES = [
     1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 100, 200, 250, 500, 1000
 ];
 
+export const POPULAR_CONVERSIONS: Record<string, string[]> = {
+    weight: [
+        'kg-to-lb', 'lb-to-kg', 'g-to-oz', 'oz-to-g',
+        'kg-to-g', 'g-to-kg', 'lb-to-oz', 'oz-to-lb',
+        'mg-to-g', 't-to-kg'
+    ],
+    length: [
+        'km-to-mi', 'mi-to-km', 'm-to-ft', 'ft-to-m',
+        'cm-to-in', 'in-to-cm', 'm-to-yd', 'yd-to-m',
+        'mm-to-in', 'm-to-cm'
+    ],
+    temperature: [
+        'c-to-f', 'f-to-c', 'c-to-k', 'k-to-c',
+        'f-to-k', 'k-to-f'
+    ]
+};
+
 export const CONVERTERS: Record<string, ConverterCategory> = {
     weight: {
         id: "weight",

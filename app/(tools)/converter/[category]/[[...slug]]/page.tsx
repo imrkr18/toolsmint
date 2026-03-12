@@ -151,27 +151,6 @@ export default async function ConverterPage({ params }: Props) {
                     "price": "0",
                     "priceCurrency": "USD",
                 },
-            },
-            {
-                "@type": "FAQPage",
-                "mainEntity": [
-                    {
-                        "@type": "Question",
-                        "name": `How to convert ${fromUnitDef.name} to ${toUnitDef.name}?`,
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": `To convert ${fromUnitDef.name} to ${toUnitDef.name}, simply enter the value in ${fromUnitDef.symbol} into the converter above. The formula is applied instantly to give you the precise ${toUnitDef.symbol} output.`,
-                        }
-                    },
-                    ...(isSpecificValue ? [{
-                        "@type": "Question",
-                        "name": `How much is ${initialValue} ${fromUnitDef.symbol} in ${toUnitDef.symbol}?`,
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": `Our real-time calculator above determines the exact conversion for ${initialValue} ${fromUnitDef.name} into ${toUnitDef.name}.`,
-                        }
-                    }] : [])
-                ]
             }
         ]
     };
